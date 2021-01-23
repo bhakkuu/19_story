@@ -2,162 +2,202 @@
 
     <head>
         <style>
-         html { height: 100%; overflow: hidden; }
-body { background: black; margin: 0; width: 100%; height: 100%; }
-
-.scene {
-  width: 480px;
-  height: 640px;
-  margin: 16px auto;
-  -webkit-perspective: 2000px;
-  perspective: 2000px;
-}
-.book {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-}
-.page {
-  cursor: pointer;
-  position: absolute;
-  color: black;
-  width: 100%;
-  height: 100%;
-
-  -webkit-transition: 1.5s -webkit-transform;
-
-  transition: 1.5s transform;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;  
-  -webkit-transform-origin: left center;  
-  -ms-transform-origin: left center;  
-  transform-origin: left center;
-}
-.front,
-.back {
-  position: absolute;
-  
-  width: 100%;
-  height: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  
-  -webkit-backface-visibility: hidden;
-  
-  backface-visibility: hidden;
-  background: -webkit-gradient(linear, 0% 0%, 100% 100%, from(#FFFFFF), to(#CCCCCC));
-  background: -webkit-gradient(linear, left top, right bottom, from(#fff), to(#ccc));
-  background: -webkit-linear-gradient(top left, #fff, #ccc);
-  background: linear-gradient(to bottom right, #fff, #ccc);
-}
-.back {
-  -webkit-transform: rotateY(180deg);
-  transform: rotateY(180deg);
-}
-
-.page.active {
-  z-index: 1;
-}
-.page.flipped {
-  -webkit-transform: rotateY(-180deg);
-  transform: rotateY(-180deg);
-}
-.page.flipped:last-of-type {
-  z-index: 1;
-}
-
-p {
-  margin: 0;
-}
+body{
+            margin:0;
+            background-color: #ffecc6;
+        }
+        *{
+            box-sizing: border-box;
+        }
+        .book-section{
+            height: 100vh;
+            width: 100%;
+            padding: 40px 0;
+            text-align: center;
+        }
+        .book-section > .container{
+            height: 400px;
+            width: 500px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2%;
+            margin-bottom: 30px;
+            perspective: 1200px;
+        }
+        .container > .right{
+            position: absolute;
+            height: 100%;
+            width: 50%;
+            transition: 0.7s ease-in-out;
+            transform-style: preserve-3d;
+        }
+        .book-section > .container > .right{
+            right:0;
+            transform-origin: left;
+            border-radius: 10px 0 0 10px;
+        }
+        .right > figure.front, .right > figure.back{
+            margin: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            left:0;
+            top:0;
+            background-size: 200%;
+            background-repeat: no-repeat;
+            backface-visibility: hidden;
+            background-color: white;
+            overflow: hidden;
+        }
+        .right > figure.front{
+            background-position: right;
+            border-radius: 0 10px 10px 0;
+            box-shadow: 2px 2px 15px -2px rgba(0,0,0,0.2);
+        }
+        .right > figure.back{
+            background-position: left;
+            border-radius: 10px 0 0 10px;
+            box-shadow: -2px 2px 15px -2px rgba(0,0,0,0.2);
+            transform: rotateY(180deg);
+        }
+        .flip{
+            transform: rotateY(-180deg);
+        }
+        .flip::before{
+            content: "";
+            position: absolute;
+            top:0;
+            left:0;
+            z-index: 10;
+            width: 100%;
+            height: 100%;
+            border-radius: 0 10px 10px 0;
+            background-color: rgba(0,0,0,0.1);
+        }
+        .book-section > button{
+            border: 2px solid #ef9f00;
+            background-color: transparent;
+            color: #ef9f00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: 0.3s ease-in-out;
+        }
+        .book-section > button:focus, .book-section > button:active{
+            outline: none;
+        }
+        .book-section > p{
+            color: rgba(0,0,0,0.7);
+            font-family: calibri;
+            font-size: 24px;
+        }
+        .book-section > p > a{
+            text-decoration: none;
+            color: #ef9f00;
+        }
+        .book-section > button:hover{
+            background-color: #ef9f00;
+            color: #fff;
+        }
+        .front#cover, .back#back-cover{
+            background-color: #ffcb63;
+            font-family: calibri;
+            text-align: left;
+            padding: 0 30px;
+        }
+        .front#cover h1{
+            color: #fff;
+        }
+        .front#cover p{
+            color: rgba(0,0,0,0.8);
+            font-size: 14px;
+        }
 
         </style>
        
        </head>
     <body>
-
-  <div class="scene">
-  <article class="book">
-  <section class="page active">
-    <div class="front">
-      <p><img src="http://lorempixel.com/480/640"></p>
+<div class="book-section">
+       <p>Illustrations by <a href="http://artisticdesigning.com" target="_blank">Nidhanshu Sharma</a></p>
+        <div class="container">
+           <div class="right">
+                <figure class="back" id="back-cover"></figure>
+                <figure class="front" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/angry_man.jpg);"></figure>
+            </div>
+            <div class="right">
+                <figure class="back" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/angry_man.jpg);"></figure>
+                <figure class="front" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/sunset_landscape.jpg);"></figure>
+            </div>
+            <div class="right">
+                <figure class="back" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/sunset_landscape.jpg);"></figure>
+                <figure class="front" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/intex_speakers.jpg);"></figure>
+            </div>
+            <div class="right">
+                <figure class="back" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/intex_speakers.jpg);"></figure>
+                <figure class="front" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/doraemon_nobita_aged.jpg);"></figure>
+            </div>
+            <div class="right">
+                <figure class="back" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/doraemon_nobita_aged.jpg);"></figure>
+                <figure class="front" style="background-image: url(http://artisticdesigning.com/Drawings/Photoshopped/narendra_modi_caricature.jpg);"></figure>
+            </div>
+            <div class="right">
+                <figure class="back" style="background-image: url('http://artisticdesigning.com/Drawings/Photoshopped/narendra_modi_caricature.jpg');"></figure>
+                <figure class="front" id="cover">
+                    <h1>Book Title</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci, modi.</p>
+                </figure>
+            </div>
+        </div>
+        <button onclick="turnLeft()">Prev</button> <button onclick="turnRight()">Next</button>
+        <br/>
     </div>
-    <div class="back">
-      <p><img src="http://lorempixel.com/480/639"></p>
-    </div>    
-  </section>
-  <section class="page">
-    <div class="front">
-      <p><img src="http://lorempixel.com/480/638"></p>
-    </div>
-    <div class="back">
-      <p><img src="http://lorempixel.com/480/637"></p>
-    </div>    
-  </section>
-    <section class="page">
-    <div class="front">
-      <p><img src="http://lorempixel.com/480/636"></p>
-    </div>
-    <div class="back">
-      <p><img src="http://lorempixel.com/480/635"></p>
-    </div>    
-  </section>
-    <section class="page">
-    <div class="front">
-     <p><img src="http://lorempixel.com/480/634"></p>
-    </div>
-    <div class="back">
-      <p><img src="http://lorempixel.com/480/633"></p>
-    </div>    
-  </section>
-    <section class="page">
-    <div class="front">
-      <p><img src="http://lorempixel.com/480/632"></p>
-    </div>
-    <div class="back">
-      <p><img src="http://lorempixel.com/480/631"></p>
-    </div>    
-  </section>
-</article>
-</div>
     </body>
     <script>
 
-var currentPage = 0;
-
-$('.book')
-.on('click', '.active', nextPage)
-.on('click', '.flipped', prevPage);
-
-$('.book').hammer().on("swipeleft", nextPage);
-$('.book').hammer().on("swiperight", prevPage);
-
-function prevPage() {
-  $('.flipped')
-    .last()
-    .removeClass('flipped')
-    .addClass('active')
-    .siblings('.page')
-    .removeClass('active');
-}
-function nextPage() {
-  $('.active')
-    .removeClass('active')
-    .addClass('flipped')
-    .next('.page')
-    .addClass('active')
-    .siblings();
-}
-
-
-        
+var right = document.getElementsByClassName("right");
+    var si = right.length;
+    var z=1;
+    turnRight();
+    function turnRight()
+    {
+        if(si>=1){
+            si--;
+        }
+        else{
+            si=right.length-1;
+            function sttmot(i){
+                setTimeout(function(){right[i].style.zIndex="auto";},300);
+            }
+            for(var i=0;i<right.length;i++){
+                right[i].className="right";
+                sttmot(i);
+                z=1;
+            }
+        }
+        right[si].classList.add("flip");
+        z++;
+        right[si].style.zIndex=z;
+    }
+    function turnLeft()
+    {
+        if(si<right.length){
+            si++;
+        }
+        else{
+            si=1;
+            for(var i=right.length-1;i>0;i--){
+                right[i].classList.add("flip");
+                right[i].style.zIndex=right.length+1-i;
+            }
+        }
+        right[si-1].className="right";
+        setTimeout(function(){right[si-1].style.zIndex="auto";},350);
+    }
         
         
                     
                 </script>
-	<script src ="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src ="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
     
 </html>
