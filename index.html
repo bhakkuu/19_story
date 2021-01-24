@@ -120,6 +120,10 @@ body{
        </head>
     <body>
 <div class="book-section">
+    <audio
+        src="./memories.mp3"
+        loop
+      ></audio>
     <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         <div class="container" style ='height: 800px;
         width: 95%;'>
@@ -174,7 +178,8 @@ body{
     </div>
     </body>
     <script>
-
+        const audio = document.querySelector("audio");
+        audio.play();
 var right = document.getElementsByClassName("right");
     var si = right.length;
     var z=1;
